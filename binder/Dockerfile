@@ -9,7 +9,60 @@ USER root
 COPY requirements.txt /tmp/requirements.txt
 RUN pip install -r /tmp/requirements.txt
 #===========================================================#
+# ------------------------------------------------------------
+# Required
+# ------------------------------------------------------------
+USER root
+RUN apt update && apt install -y --no-install-recommends \
+    ros-jazzy-ros2-control \
+    ros-jazzy-ros2-controllers \
+    ros-jazzy-controller-manager \
+    ros-jazzy-control-msgs \
+    graphviz graphviz-dev && \
+    rm -rf /var/lib/apt/lists/*
+# ------------------------------------------------------------
+# Multiverse installation
+# ------------------------------------------------------------
+USER ${NB_USER}
+ENV MV_ROOT=${HOME}/Multiverse
+ENV MULTIVERSE_REPO=https://github.com/Multiverse-Framework/Multiverse
+ENV MULTIVERSE_BRANCH=main
 
+RUN set -ex && \
+    mkdir -p ${MV_ROOT} && \
+    cd ${HOME} && \
+    git clone --recurse-submodules --depth 1 --branch ${MULTIVERSE_BRANCH} ${MULTIVERSE_REPO} ${MV_ROOT} || \
+    (cd ${MV_ROOT} && git submodule update --init --recursive) && \
+    cd ${MV_ROOT} && \
+    if [ -f "./Multiverse-Launch/requirements.txt" ]; then \
+    pip install --no-cache-dir -r ./Multiverse-Launch/requirements.txt; fi && \
+    if [ -f "./Multiverse-Utilities/requirements.txt" ]; then \
+    pip install --no-cache-dir -r ./Multiverse-Utilities/requirements.txt; fi && \
+    if [ -f "./Multiverse-Launch/src/multiverse_connectors/multiverse_simulators_connector/src/mujoco_connector/requirements.txt" ]; then \
+    pip install --no-cache-dir -r ./Multiverse-Launch/src/multiverse_connectors/multiverse_simulators_connector/src/mujoco_connector/requirements.txt; fi && \
+    if [ -d "./Multiverse-Launch/src/multiverse_connectors/multiverse_ros_connector/ros_ws/multiverse_ws2" ]; then \
+    cd ./Multiverse-Launch/src/multiverse_connectors/multiverse_ros_connector/ros_ws/multiverse_ws2 && \
+    /bin/bash -c "source /opt/ros/jazzy/setup.bash && colcon build --symlink-install"; \
+    cd ${MV_ROOT}; \
+    fi
+
+# ------------------------------------------------------------
+# Install demo repository and cram code
+# ------------------------------------------------------------
+USER ${NB_USER}
+RUN pip install poetry
+RUN set -ex && \ 
+    poetry config virtualenvs.create false && \
+    mkdir -p ${HOME}/libs && cd ${HOME}/libs && \
+    git clone https://github.com/HoangGiang93/semantic_digital_twin_demo.git && \
+    git clone https://github.com/cram2/cognitive_robot_abstract_machine.git &&\
+    cd cognitive_robot_abstract_machine && \
+    sed -i '/^[[:space:]]*random_events[[:space:]]*=.*$/d' pyproject.toml && \
+    poetry install
+
+
+
+USER root
 # Copy content to the image
 ENV REPO_DIR=/home/repo
 RUN mkdir -p ${REPO_DIR}
