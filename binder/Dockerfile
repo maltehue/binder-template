@@ -16,6 +16,7 @@ USER root
 RUN apt update && apt install -y --no-install-recommends \
     ros-jazzy-ros2-control \
     ros-jazzy-ros2-controllers \
+    ros-jazzy-hardware-interface \
     ros-jazzy-controller-manager \
     ros-jazzy-control-msgs \
     graphviz graphviz-dev && \
@@ -24,21 +25,21 @@ RUN apt update && apt install -y --no-install-recommends \
 # ------------------------------------------------------------
 # Install demo repository and cram code
 # ------------------------------------------------------------
-# USER ${NB_USER}
-# RUN pip install poetry
-# RUN set -ex && \ 
-#     poetry config virtualenvs.create false && \
-#     mkdir -p ${HOME}/libs && cd ${HOME}/libs && \
-#     git clone https://github.com/HoangGiang93/semantic_digital_twin_demo.git && \
-#     git clone https://github.com/cram2/cognitive_robot_abstract_machine.git &&\
-#     cd cognitive_robot_abstract_machine && \
-#     sed -i '/^[[:space:]]*random_events[[:space:]]*=.*$/d' pyproject.toml && \
-#     poetry install
+
+RUN pip install poetry
+RUN set -ex && \ 
+    poetry config virtualenvs.create false && \
+    mkdir -p ${HOME}/libs && cd ${HOME}/libs && \
+    git clone https://github.com/HoangGiang93/semantic_digital_twin_demo.git && \
+    git clone https://github.com/cram2/cognitive_robot_abstract_machine.git &&\
+    cd cognitive_robot_abstract_machine && \
+    sed -i '/^[[:space:]]*random_events[[:space:]]*=.*$/d' pyproject.toml && \
+    poetry install
 
 # ------------------------------------------------------------
 # Multiverse installation
 # ------------------------------------------------------------
-USER ${NB_USER}
+
 ENV MV_ROOT=${HOME}/Multiverse
 ENV MULTIVERSE_REPO=https://github.com/Multiverse-Framework/Multiverse
 ENV MULTIVERSE_BRANCH=main
