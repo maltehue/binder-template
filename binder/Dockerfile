@@ -16,7 +16,7 @@ USER root
 RUN apt update && apt install -y --no-install-recommends \
     ros-jazzy-ros2-control \
     ros-jazzy-ros2-controllers \
-    ros-jazzy-hardware-interface\
+    ros-jazzy-hardware-interface \
     ros-jazzy-controller-manager \
     ros-jazzy-control-msgs \
     graphviz graphviz-dev && \
