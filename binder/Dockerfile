@@ -19,7 +19,6 @@ RUN apt update && apt install -y --no-install-recommends \
     ros-jazzy-hardware-interface \
     ros-jazzy-controller-manager \
     ros-jazzy-control-msgs \
-    ros-jazzy-pal-statistics \
     graphviz graphviz-dev && \
     rm -rf /var/lib/apt/lists/*
 
