@@ -20,3 +20,4 @@ services:
       # - /tmp/.X11-unix:/tmp/.X11-unix:rw
     # environment:
     #   - DISPLAY
+    # network_mode: host

@@ -19,7 +19,8 @@ RUN apt update && apt install -y --no-install-recommends \
     ros-jazzy-hardware-interface \
     ros-jazzy-controller-manager \
     ros-jazzy-control-msgs \
-    graphviz graphviz-dev && \
+    graphviz graphviz-dev \
+    python3-vcstool && \
     rm -rf /var/lib/apt/lists/*
 
 # ------------------------------------------------------------
@@ -27,10 +28,10 @@ RUN apt update && apt install -y --no-install-recommends \
 # ------------------------------------------------------------
 
 RUN pip install poetry
-RUN set -ex && \ 
+RUN set -ex && \
     poetry config virtualenvs.create false && \
     mkdir -p ${HOME}/libs && cd ${HOME}/libs && \
-    git clone https://github.com/HoangGiang93/semantic_digital_twin_demo.git && \
+    git clone https://github.com/maltehue/semantic_digital_twin_demo.git && \
     git clone https://github.com/cram2/cognitive_robot_abstract_machine.git &&\
     cd cognitive_robot_abstract_machine && \
     sed -i '/^[[:space:]]*random_events[[:space:]]*=.*$/d' pyproject.toml && \
@@ -63,8 +64,29 @@ RUN set -ex && \
     fi
 
 
+# ------------------------------------------------------------
+# ROS2 workspace: giskardpy_ros (clone, deps, build)
+# ------------------------------------------------------------
 
+ARG ROS_DISTRO=jazzy
+ENV ROS_DISTRO=${ROS_DISTRO}
 
+# Create workspace, fetch sources, install Python reqs and system deps, then build
+RUN set -ex && \
+    mkdir -p ${HOME}/giskard_ws/src && cd ${HOME}/giskard_ws/src && \
+    git clone https://github.com/SemRoCo/giskardpy_ros.git -b tiago_velocity_semdt && \
+    git clone https://github.com/code-iai/iai_tiago_description.git -b ros2-main && \
+    pip install -r giskardpy_ros/requirements.txt && \
+    cd ${HOME}/giskard_ws && \
+    vcs import src < src/giskardpy_ros/$ROS_DISTRO.repos && \
+    rosdep update --rosdistro=$ROS_DISTRO && \
+    apt-get update && rosdep install --from-paths ./ -i -y --rosdistro ${ROS_DISTRO} && \
+    /bin/bash -lc "set -ex; source /opt/ros/${ROS_DISTRO}/setup.bash && cd ${HOME}/giskard_ws && colcon build"
+
+# Note: Sourcing the workspace at runtime should be done in the entrypoint or shell:
+#   source ~/giskard_ws/install/setup.bash
+
+RUN pip install "setuptools<81"
 
 USER root
 # Copy content to the image
