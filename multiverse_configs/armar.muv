@@ -1,0 +1,64 @@
+resources:
+  - ./../../jovyan/Multiverse-Utilities/scripts/
+  - ./../../Multiverse/Multiverse-Utilities/scripts/
+  - ./
+
+
+worlds:
+  world:
+    rtf_desired: 1
+
+multiverse_server:
+  host: "tcp://127.0.0.1"
+  port: 7000
+
+multiverse_clients:
+  ros2:
+    ros_nodes:
+      subscribers:
+        cmd_vel:
+          - meta_data:
+              world_name: world
+              length_unit: m
+              angle_unit: rad
+              mass_unit: kg
+              time_unit: s
+              handedness: rhs
+            port: 7200
+            topic: /cmd_vel
+            body: Platform_link
+
+    ros2_control:
+      - meta_data:
+          world_name: world
+          length_unit: m
+          angle_unit: rad
+          mass_unit: kg
+          time_unit: s
+          handedness: rhs
+        port: 7600
+        controller_manager:
+          robot: Armar7
+          robot_description: /robot_description
+          urdf: Armar7.urdf
+          config: ros2_control.yaml
+          actuators:
+            ArmR1_Cla1_actuator: ArmR1_Cla1
+            ArmR2_Sho1_actuator: ArmR2_Sho1
+            ArmR3_Sho2_actuator: ArmR3_Sho2
+            ArmR4_Sho3_actuator: ArmR4_Sho3
+            ArmR5_Elb1_actuator: ArmR5_Elb1
+            ArmR6_Elb2_actuator: ArmR6_Elb2
+            ArmR7_Wri1_actuator: ArmR7_Wrist_Hemisphere_A
+            ArmR7_Wri2_actuator: ArmR8_Wrist_Hemisphere_B
+          controllers:
+            spawner:
+              - joint_state_broadcaster
+                arm_joint_trajectory_controller
+
+processes:
+  - multiverse_initializing.py:
+      world: world
+      simulation_name: multiverse_initializer
+      port: 5000
+      data_path: armar_init.yaml

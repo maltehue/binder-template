@@ -1,0 +1,50 @@
+ArmR1_Cla1_actuator:
+  cmd_joint_angular_position: [0.2]
+ArmR2_Sho1_actuator:
+  cmd_joint_angular_position: [-0.03]
+ArmR3_Sho2_actuator:
+  cmd_joint_angular_position: [-0.003]
+ArmR4_Sho3_actuator:
+  cmd_joint_angular_position: [0.007]
+ArmR5_Elb1_actuator:
+  cmd_joint_angular_position: [0.0]
+ArmR6_Elb2_actuator:
+  cmd_joint_angular_position: [-0.008]
+ArmR7_Wri1_actuator:
+  cmd_joint_angular_position: [0.0]
+ArmR7_Wri2_actuator:
+  cmd_joint_angular_position: [-0.003]
+
+
+ArmR1_Cla1:
+  joint_angular_position: [0.0]
+  joint_angular_velocity: [0.0]
+  joint_torque: [0.0]
+ArmR2_Sho1:
+  joint_angular_position: [-0.03]
+  joint_angular_velocity: [0.0]
+  joint_torque: [0.0]
+ArmR3_Sho2:
+  joint_angular_position: [-0.003]
+  joint_angular_velocity: [0.0]
+  joint_torque: [0.0]
+ArmR4_Sho3:
+  joint_angular_position: [0.007]
+  joint_angular_velocity: [0.0]
+  joint_torque: [0.0]
+ArmR5_Elb1:
+  joint_angular_position: [0.0]
+  joint_angular_velocity: [0.0]
+  joint_torque: [0.0]
+ArmR6_Elb2:
+  joint_angular_position: [-0.008]
+  joint_angular_velocity: [0.0]
+  joint_torque: [0.0]
+ArmR7_Wrist_Hemisphere_A:
+  joint_angular_position: [0.0]
+  joint_angular_velocity: [0.0]
+  joint_torque: [0.0]
+ArmR8_Wrist_Hemisphere_B:
+  joint_linear_position: [-0.003]
+  joint_linear_velocity: [0.0]
+  joint_force: [0.0]
