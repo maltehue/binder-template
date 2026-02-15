@@ -15,43 +15,43 @@
     <visual name="Geom_0">
       <origin xyz="-0.0004379579913802445 0.0006105366046540439 0.18876424431800842" rpy="2.529369592666626 -1.5622938871383667 0.6251600980758667"/>
       <geometry>
-        <mesh filename="/home/malte/libs/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/base_link.obj" scale="1.0 1.0 1.0"/>
+        <mesh filename="/home/jovyan/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/base_link.obj" scale="1.0 1.0 1.0"/>
       </geometry>
     </visual>
     <visual name="Geom_1">
       <origin xyz="-0.2705947458744049 0.17634128034114838 0.2484888881444931" rpy="-2.325547695159912 -0.039992284029722214 0.8522990942001343"/>
       <geometry>
-        <mesh filename="/home/malte/libs/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/sick_tim551.obj" scale="1.0 1.0 1.0"/>
+        <mesh filename="/home/jovyan/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/sick_tim551.obj" scale="1.0 1.0 1.0"/>
       </geometry>
     </visual>
     <visual name="Geom_2">
       <origin xyz="0.2705947458744049 -0.17634128034114838 0.2484888881444931" rpy="-2.325547695159912 -0.039992284029722214 -2.2892935276031494"/>
       <geometry>
-        <mesh filename="/home/malte/libs/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/sick_tim551.obj" scale="1.0 1.0 1.0"/>
+        <mesh filename="/home/jovyan/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/sick_tim551.obj" scale="1.0 1.0 1.0"/>
       </geometry>
     </visual>
     <visual name="Geom_3">
       <origin xyz="0.3472467064857483 -7.037353444863963e-20 0.13580000400543213" rpy="0.0 0.0 0.0"/>
       <geometry>
-        <mesh filename="/home/malte/libs/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/base_dock_link.obj" scale="1.0 1.0 1.0"/>
+        <mesh filename="/home/jovyan/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/base_dock_link.obj" scale="1.0 1.0 1.0"/>
       </geometry>
     </visual>
     <visual name="Geom_4">
       <origin xyz="-0.20163482427597046 -0.12999983131885529 0.34668824076652527" rpy="0.0 0.0017822254449129105 0.0"/>
       <geometry>
-        <mesh filename="/home/malte/libs/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/antenna.obj" scale="1.0 1.0 1.0"/>
+        <mesh filename="/home/jovyan/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/antenna.obj" scale="1.0 1.0 1.0"/>
       </geometry>
     </visual>
     <visual name="Geom_5">
       <origin xyz="-0.20163482427597046 0.13000015914440155 0.34668824076652527" rpy="0.0 0.0017822254449129105 0.0"/>
       <geometry>
-        <mesh filename="/home/malte/libs/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/antenna.obj" scale="1.0 1.0 1.0"/>
+        <mesh filename="/home/jovyan/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/antenna.obj" scale="1.0 1.0 1.0"/>
       </geometry>
     </visual>
     <visual name="Geom_6">
       <origin xyz="0.0014096212107688189 -8.276616696688277e-13 0.30480068922042847" rpy="3.1415927410125732 -1.5183167457580566 0.0"/>
       <geometry>
-        <mesh filename="/home/malte/libs/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/torso_fix.obj" scale="1.0 1.0 1.0"/>
+        <mesh filename="/home/jovyan/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/torso_fix.obj" scale="1.0 1.0 1.0"/>
       </geometry>
     </visual>
   </link>
@@ -77,7 +77,7 @@
     <visual name="Geom_8">
       <origin xyz="-4.427643943927251e-05 3.0983595934230834e-05 0.0008158651762641966" rpy="2.424741744995117 -1.5695745944976807 1.1842061281204224"/>
       <geometry>
-        <mesh filename="/home/malte/libs/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/wheel_link_right.obj" scale="1.0 1.0 1.0"/>
+        <mesh filename="/home/jovyan/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/wheel_link_right.obj" scale="1.0 1.0 1.0"/>
       </geometry>
       <material name="Geom_8_material">
         <color rgba="0.1 0.1 0.1 1.0"/>
@@ -106,7 +106,7 @@
     <visual name="Geom_10">
       <origin xyz="-4.427643943927251e-05 3.0983595934230834e-05 -0.0008158651762641966" rpy="-0.7168509364128113 -1.5695745944976807 -1.9573864936828613"/>
       <geometry>
-        <mesh filename="/home/malte/libs/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/wheel_link_left.obj" scale="1.0 1.0 1.0"/>
+        <mesh filename="/home/jovyan/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/wheel_link_left.obj" scale="1.0 1.0 1.0"/>
       </geometry>
       <material name="Geom_10_material">
         <color rgba="0.1 0.1 0.1 1.0"/>
@@ -135,7 +135,7 @@
     <visual name="Geom_12">
       <origin xyz="-4.427643943927251e-05 3.0983595934230834e-05 0.0008158651762641966" rpy="2.424741744995117 -1.5695745944976807 1.1842061281204224"/>
       <geometry>
-        <mesh filename="/home/malte/libs/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/wheel_link_right.obj" scale="1.0 1.0 1.0"/>
+        <mesh filename="/home/jovyan/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/wheel_link_right.obj" scale="1.0 1.0 1.0"/>
       </geometry>
       <material name="Geom_12_material">
         <color rgba="0.1 0.1 0.1 1.0"/>
@@ -164,7 +164,7 @@
     <visual name="Geom_14">
       <origin xyz="-4.427643943927251e-05 3.0983595934230834e-05 -0.0008158651762641966" rpy="-0.7168509364128113 -1.5695745944976807 -1.9573864936828613"/>
       <geometry>
-        <mesh filename="/home/malte/libs/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/wheel_link_left.obj" scale="1.0 1.0 1.0"/>
+        <mesh filename="/home/jovyan/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/wheel_link_left.obj" scale="1.0 1.0 1.0"/>
       </geometry>
       <material name="Geom_14_material">
         <color rgba="0.1 0.1 0.1 1.0"/>
@@ -187,7 +187,7 @@
     <visual name="Geom_16">
       <origin xyz="0.008324982598423958 9.267596033168957e-05 -0.20267997682094574" rpy="-0.0014478468801826239 0.027225002646446228 0.0012620562920346856"/>
       <geometry>
-        <mesh filename="/home/malte/libs/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/torso_lift_dual_arm.obj" scale="1.0 1.0 1.0"/>
+        <mesh filename="/home/jovyan/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/torso_lift_dual_arm.obj" scale="1.0 1.0 1.0"/>
       </geometry>
     </visual>
   </link>
@@ -207,7 +207,7 @@
     <visual name="Geom_17">
       <origin xyz="0.007740858476608992 -3.852190388897725e-08 0.08860164880752563" rpy="0.35489529371261597 2.488450491000549e-06 1.5707972049713135"/>
       <geometry>
-        <mesh filename="/home/malte/libs/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/head_1.obj" scale="1.0 1.0 1.0"/>
+        <mesh filename="/home/jovyan/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/head_1.obj" scale="1.0 1.0 1.0"/>
       </geometry>
     </visual>
   </link>
@@ -227,7 +227,7 @@
     <visual name="Geom_18">
       <origin xyz="0.028065964579582214 0.048764217644929886 -7.89526711741928e-06" rpy="3.873794776154682e-05 3.7604697809001664e-06 2.1247029304504395"/>
       <geometry>
-        <mesh filename="/home/malte/libs/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/head_2.obj" scale="1.0 1.0 1.0"/>
+        <mesh filename="/home/jovyan/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/head_2.obj" scale="1.0 1.0 1.0"/>
       </geometry>
     </visual>
   </link>
@@ -247,7 +247,7 @@
     <visual name="Geom_19">
       <origin xyz="0.07808643579483032 -0.032326169312000275 0.013299822807312012" rpy="-0.25164595246315 -1.26142418384552 2.949169635772705"/>
       <geometry>
-        <mesh filename="/home/malte/libs/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/arm_left_1.obj" scale="1.0 1.0 1.0"/>
+        <mesh filename="/home/jovyan/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/arm_left_1.obj" scale="1.0 1.0 1.0"/>
       </geometry>
     </visual>
   </link>
@@ -267,7 +267,7 @@
     <visual name="Geom_20">
       <origin xyz="0.02370639704167843 9.225682151736692e-05 -0.013983087614178658" rpy="0.004223653580993414 -1.0792927742004395 3.137371063232422"/>
       <geometry>
-        <mesh filename="/home/malte/libs/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/arm_left_2.obj" scale="1.0 1.0 1.0"/>
+        <mesh filename="/home/jovyan/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/arm_left_2.obj" scale="1.0 1.0 1.0"/>
       </geometry>
     </visual>
   </link>
@@ -287,7 +287,7 @@
     <visual name="Geom_21">
       <origin xyz="-0.0026167999021708965 0.005651607643812895 0.12450383603572845" rpy="-0.10726087540388107 0.07503989338874817 1.1100659370422363"/>
       <geometry>
-        <mesh filename="/home/malte/libs/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/arm_left_3.obj" scale="1.0 1.0 1.0"/>
+        <mesh filename="/home/jovyan/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/arm_left_3.obj" scale="1.0 1.0 1.0"/>
       </geometry>
     </visual>
   </link>
@@ -307,7 +307,7 @@
     <visual name="Geom_22">
       <origin xyz="0.08055655658245087 -0.016018036752939224 -0.020240843296051025" rpy="-1.9858064651489258 -1.1720080375671387 -1.2853622436523438"/>
       <geometry>
-        <mesh filename="/home/malte/libs/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/arm_left_4.obj" scale="1.0 1.0 1.0"/>
+        <mesh filename="/home/jovyan/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/arm_left_4.obj" scale="1.0 1.0 1.0"/>
       </geometry>
     </visual>
   </link>
@@ -327,7 +327,7 @@
     <visual name="Geom_23">
       <origin xyz="0.005094317253679037 -2.310533818672411e-05 -0.07825614511966705" rpy="-0.002001233631744981 0.04423227533698082 -0.0005554198287427425"/>
       <geometry>
-        <mesh filename="/home/malte/libs/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/arm_left_5.obj" scale="1.0 1.0 1.0"/>
+        <mesh filename="/home/jovyan/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/arm_left_5.obj" scale="1.0 1.0 1.0"/>
       </geometry>
     </visual>
   </link>
@@ -347,7 +347,7 @@
     <visual name="Geom_24">
       <origin xyz="-0.011458860710263252 7.318072814399557e-09 -1.7091250015255355e-07" rpy="1.5707802772521973 -1.570719599723816 1.5707963705062866"/>
       <geometry>
-        <mesh filename="/home/malte/libs/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/arm_left_6.obj" scale="1.0 1.0 1.0"/>
+        <mesh filename="/home/jovyan/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/arm_left_6.obj" scale="1.0 1.0 1.0"/>
       </geometry>
     </visual>
   </link>
@@ -385,7 +385,7 @@
     <visual name="Geom_28">
       <origin xyz="-1.6859998140716925e-05 2.7552810934139416e-05 -0.12023548036813736" rpy="1.7872308492660522 0.0011314318981021643 0.3720128834247589"/>
       <geometry>
-        <mesh filename="/home/malte/libs/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/gripper_link.obj" scale="1.0 1.0 1.0"/>
+        <mesh filename="/home/jovyan/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/gripper_link.obj" scale="1.0 1.0 1.0"/>
       </geometry>
     </visual>
   </link>
@@ -405,7 +405,7 @@
     <visual name="Geom_29">
       <origin xyz="-0.005595054477453232 0.010564076714217663 -0.12138593196868896" rpy="0.1775592416524887 0.129255473613739 -3.0987892150878906"/>
       <geometry>
-        <mesh filename="/home/malte/libs/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/gripper_right_finger_link.obj" scale="1.0 1.0 1.0"/>
+        <mesh filename="/home/jovyan/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/gripper_right_finger_link.obj" scale="1.0 1.0 1.0"/>
       </geometry>
     </visual>
   </link>
@@ -425,7 +425,7 @@
     <visual name="Geom_30">
       <origin xyz="0.005595054477453232 -0.010564076714217663 -0.12138593196868896" rpy="-0.1775592416524887 -0.129255473613739 -3.0987892150878906"/>
       <geometry>
-        <mesh filename="/home/malte/libs/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/gripper_left_finger_link.obj" scale="1.0 1.0 1.0"/>
+        <mesh filename="/home/jovyan/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/gripper_left_finger_link.obj" scale="1.0 1.0 1.0"/>
       </geometry>
     </visual>
   </link>
@@ -445,7 +445,7 @@
     <visual name="Geom_31">
       <origin xyz="0.07808643579483032 -0.032326169312000275 -0.013299822807312012" rpy="2.889946699142456 -1.26142418384552 -0.19242295622825623"/>
       <geometry>
-        <mesh filename="/home/malte/libs/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/arm_right_1.obj" scale="1.0 1.0 1.0"/>
+        <mesh filename="/home/jovyan/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/arm_right_1.obj" scale="1.0 1.0 1.0"/>
       </geometry>
     </visual>
   </link>
@@ -465,7 +465,7 @@
     <visual name="Geom_32">
       <origin xyz="0.02370639704167843 9.225682151736692e-05 0.013983087614178658" rpy="-3.13736891746521 -1.0792927742004395 -0.004221487790346146"/>
       <geometry>
-        <mesh filename="/home/malte/libs/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/arm_right_2.obj" scale="1.0 1.0 1.0"/>
+        <mesh filename="/home/jovyan/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/arm_right_2.obj" scale="1.0 1.0 1.0"/>
       </geometry>
     </visual>
   </link>
@@ -485,7 +485,7 @@
     <visual name="Geom_33">
       <origin xyz="-0.0026167999021708965 0.005651607643812895 -0.12450383603572845" rpy="0.10726087540388107 -0.07503989338874817 1.1100659370422363"/>
       <geometry>
-        <mesh filename="/home/malte/libs/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/arm_right_3.obj" scale="1.0 1.0 1.0"/>
+        <mesh filename="/home/jovyan/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/arm_right_3.obj" scale="1.0 1.0 1.0"/>
       </geometry>
     </visual>
   </link>
@@ -505,7 +505,7 @@
     <visual name="Geom_34">
       <origin xyz="-0.08055655658245087 0.016018036752939224 0.020240843296051025" rpy="-1.9858064651489258 -1.1720080375671387 -1.2853622436523438"/>
       <geometry>
-        <mesh filename="/home/malte/libs/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/arm_right_4.obj" scale="1.0 1.0 1.0"/>
+        <mesh filename="/home/jovyan/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/arm_right_4.obj" scale="1.0 1.0 1.0"/>
       </geometry>
     </visual>
   </link>
@@ -525,7 +525,7 @@
     <visual name="Geom_35">
       <origin xyz="-0.005094317253679037 2.310533818672411e-05 0.07825614511966705" rpy="-0.002001233631744981 0.04423227533698082 -0.0005554198287427425"/>
       <geometry>
-        <mesh filename="/home/malte/libs/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/arm_right_5.obj" scale="1.0 1.0 1.0"/>
+        <mesh filename="/home/jovyan/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/arm_right_5.obj" scale="1.0 1.0 1.0"/>
       </geometry>
     </visual>
   </link>
@@ -545,7 +545,7 @@
     <visual name="Geom_36">
       <origin xyz="0.011458860710263252 7.318072814399557e-09 -1.7091250015255355e-07" rpy="1.570812463760376 -1.570719599723816 1.5707963705062866"/>
       <geometry>
-        <mesh filename="/home/malte/libs/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/arm_right_6.obj" scale="1.0 1.0 1.0"/>
+        <mesh filename="/home/jovyan/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/arm_right_6.obj" scale="1.0 1.0 1.0"/>
       </geometry>
     </visual>
   </link>
@@ -583,7 +583,7 @@
     <visual name="Geom_40">
       <origin xyz="1.6859998140716925e-05 2.7552810934139416e-05 0.12023548036813736" rpy="-1.3543617725372314 -0.0011314318981021643 2.7695796489715576"/>
       <geometry>
-        <mesh filename="/home/malte/libs/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/gripper_link.obj" scale="1.0 1.0 1.0"/>
+        <mesh filename="/home/jovyan/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/gripper_link.obj" scale="1.0 1.0 1.0"/>
       </geometry>
     </visual>
   </link>
@@ -603,7 +603,7 @@
     <visual name="Geom_41">
       <origin xyz="-0.005595054477453232 0.010564076714217663 -0.12138593196868896" rpy="0.1775592416524887 0.129255473613739 -3.0987892150878906"/>
       <geometry>
-        <mesh filename="/home/malte/libs/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/gripper_right_finger_link.obj" scale="1.0 1.0 1.0"/>
+        <mesh filename="/home/jovyan/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/gripper_right_finger_link.obj" scale="1.0 1.0 1.0"/>
       </geometry>
     </visual>
   </link>
@@ -623,7 +623,7 @@
     <visual name="Geom_42">
       <origin xyz="0.005595054477453232 -0.010564076714217663 -0.12138593196868896" rpy="-0.1775592416524887 -0.129255473613739 -3.0987892150878906"/>
       <geometry>
-        <mesh filename="/home/malte/libs/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/gripper_left_finger_link.obj" scale="1.0 1.0 1.0"/>
+        <mesh filename="/home/jovyan/Multiverse/Multiverse-Resources/robots/pal_robotics/tiago_dual/urdf/meshes/gripper_left_finger_link.obj" scale="1.0 1.0 1.0"/>
       </geometry>
     </visual>
   </link>

@@ -67,6 +67,7 @@ RUN set -ex && \
 # ------------------------------------------------------------
 # ROS2 workspace: giskardpy_ros (clone, deps, build)
 # ------------------------------------------------------------
+RUN pip install xacro
 
 ARG ROS_DISTRO=jazzy
 ENV ROS_DISTRO=${ROS_DISTRO}
