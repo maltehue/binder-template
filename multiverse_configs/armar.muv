@@ -1,5 +1,5 @@
 resources:
-  - ./../../jovyan/Multiverse-Utilities/scripts/
+  - ./../../jovyan/Multiverse/Multiverse-Utilities/scripts/
   - ./../../Multiverse/Multiverse-Utilities/scripts/
   - ./
 
