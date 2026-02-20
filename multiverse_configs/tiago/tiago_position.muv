@@ -1,0 +1,88 @@
+resources:
+  - ./../../../jovyan/Multiverse/Multiverse-Utilities/scripts/
+  - ./../../../Multiverse/Multiverse-Utilities/scripts/
+  - ./../../../jovyan/Multiverse/Multiverse-Resources/robots
+  - ./../../../jovyan/Multiverse/Multiverse-Resources/worlds
+  - ./../../../jovyan/Multiverse/Multiverse-Resources/objects
+  - ./../../../jovyan/Multiverse/Multiverse-Resources/demos
+  - ./
+
+
+worlds:
+  world:
+    rtf_desired: 1
+
+multiverse_server:
+  host: "tcp://127.0.0.1"
+  port: 7000
+
+multiverse_clients:
+  ros2:
+    ros_nodes:
+      subscribers:
+        cmd_vel:
+          - meta_data:
+              world_name: world
+              length_unit: m
+              angle_unit: rad
+              mass_unit: kg
+              time_unit: s
+              handedness: rhs
+            port: 7200
+            topic: /cmd_vel
+            body: base_link
+
+    ros2_control:
+      - meta_data:
+          world_name: world
+          length_unit: m
+          angle_unit: rad
+          mass_unit: kg
+          time_unit: s
+          handedness: rhs
+        port: 7600
+        controller_manager:
+          robot: tiago_dual
+          robot_description: /robot_description
+          urdf: tiago_dual/urdf/tiago_dual.urdf
+          config: tiago_ros2_control.yaml
+          actuators:
+            arm_left_1_joint_position: arm_left_1_joint
+            arm_left_2_joint_position: arm_left_2_joint
+            arm_left_3_joint_position: arm_left_3_joint
+            arm_left_4_joint_position: arm_left_4_joint
+            arm_left_5_joint_position: arm_left_5_joint
+            arm_left_6_joint_position: arm_left_6_joint
+            arm_left_7_joint_position: arm_left_7_joint
+            arm_right_1_joint_position: arm_right_1_joint
+            arm_right_2_joint_position: arm_right_2_joint
+            arm_right_3_joint_position: arm_right_3_joint
+            arm_right_4_joint_position: arm_right_4_joint
+            arm_right_5_joint_position: arm_right_5_joint
+            arm_right_6_joint_position: arm_right_6_joint
+            arm_right_7_joint_position: arm_right_7_joint
+            torso_lift_joint_position: torso_lift_joint
+            head_1_joint_position: head_1_joint
+            head_2_joint_position: head_2_joint
+            gripper_left_left_finger_joint_position: gripper_left_left_finger_joint
+            gripper_left_right_finger_joint_position: gripper_left_right_finger_joint
+            gripper_right_left_finger_joint_position: gripper_right_left_finger_joint
+            gripper_right_right_finger_joint_position: gripper_right_right_finger_joint
+          controllers:
+            spawner:
+              - joint_state_broadcaster
+                realtime_body_controller_real
+          
+
+    ros2_run:
+      rviz2:
+        config: apartment_with_tiago_dual/config/rviz2.rviz
+        robot_descriptions:
+          tiago_description: tiago_dual/urdf/tiago_dual.urdf
+
+processes:
+  - multiverse_initializing.py:
+      world: world
+      simulation_name: multiverse_initializer
+      port: 5000
+      data_path: tiago_dual_init.yaml

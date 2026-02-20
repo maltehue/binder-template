@@ -55,6 +55,7 @@ multiverse_clients:
             spawner:
               - joint_state_broadcaster
                 arm_joint_trajectory_controller
+                realtime_body_controller_real
 
 processes:
   - multiverse_initializing.py:

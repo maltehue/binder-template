@@ -10,7 +10,6 @@ arm_joint_trajectory_controller:
   ros__parameters:
     type: joint_trajectory_controller/JointTrajectoryController
     joints:
-      - ArmR1_Cla1
       - ArmR2_Sho1
       - ArmR3_Sho2
       - ArmR4_Sho3
@@ -29,4 +28,14 @@ arm_joint_trajectory_controller:
       - velocity
 
     open_loop_control: True
+
+realtime_body_controller_real:
+  ros__parameters:
+    type: hsr_velocity_controller_ns/HsrVelocityController
+    joints:
+      - ArmR1_Cla1
+    p_gains: [0.1]
+    i_gains: [0.0]
+    d_gains: [0.0]
+    feedforward_gains: [1.0]
 

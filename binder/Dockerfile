@@ -84,6 +84,10 @@ RUN set -ex && \
     apt-get update && rosdep install --from-paths ./ -i -y --rosdistro ${ROS_DISTRO} && \
     /bin/bash -lc "set -ex; source /opt/ros/${ROS_DISTRO}/setup.bash && cd ${HOME}/giskard_ws && colcon build"
 
+
+RUN set -ex && \
+    cd ${HOME}/giskard_ws/src && git clone https://github.com/code-iai/iai_hsr.git -b ros2-humble && cd iai_hsr && rm -rf hsr_description hsr_navigation iai_hsr_bringup && \
+    cd ${HOME}/giskard_ws && /bin/bash -lc "set -ex; source /opt/ros/${ROS_DISTRO}/setup.bash && cd ${HOME}/giskard_ws && colcon build --cmake-args -DBUILD_TESTING=OFF"
 # Note: Sourcing the workspace at runtime should be done in the entrypoint or shell:
 #   source ~/giskard_ws/install/setup.bash
 
