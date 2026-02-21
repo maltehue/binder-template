@@ -65,6 +65,11 @@ description = ParkArmsActionDescription([Arms.BOTH])
 plan = SequentialPlan(
     context,
     description,
+    MoveTorsoActionDescription(TorsoState.LOW),
+    MoveTorsoActionDescription(TorsoState.MID),
+    MoveTorsoActionDescription(TorsoState.HIGH),
+    SetGripperActionDescription([Arms.BOTH], [GripperState.CLOSE]),
+    SetGripperActionDescription([Arms.BOTH], [GripperState.OPEN]),
 )
 
 with real_robot:
