@@ -1,0 +1,49 @@
+resources:
+  - ./../../../jovyan/Multiverse/Multiverse-Utilities/scripts/
+  - ./../../../Multiverse/Multiverse-Utilities/scripts/
+  - ./
+
+
+worlds:
+  world:
+    rtf_desired: 1
+
+multiverse_server:
+  host: "tcp://127.0.0.1"
+  port: 7000
+
+multiverse_clients:
+  ros2:
+    ros2_control:
+      - meta_data:
+          world_name: world
+          length_unit: m
+          angle_unit: rad
+          mass_unit: kg
+          time_unit: s
+          handedness: rhs
+        port: 7600
+        controller_manager:
+          robot: ur
+          robot_description: /robot_description
+          urdf: ur5e.urdf
+          config: ros2_control.yaml
+          actuators:
+            shoulder_pan_position: shoulder_pan_joint
+            shoulder_lift_position: shoulder_lift_joint
+            elbow_position: elbow_joint
+            wrist_1_position: wrist_1_joint
+            wrist_2_position: wrist_2_joint
+            wrist_3_position: wrist_3_joint
+            
+          controllers:
+            spawner:
+              - joint_state_broadcaster
+                arm_joint_trajectory_controller
+
+processes:
+  - multiverse_initializing.py:
+      world: world
+      simulation_name: multiverse_initializer
+      port: 5000
+      data_path: fera_init.yaml

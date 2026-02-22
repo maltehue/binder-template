@@ -1,0 +1,43 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100  # Hz
+
+joint_state_broadcaster:
+  ros__parameters:
+    type: joint_state_broadcaster/JointStateBroadcaster
+
+arm_joint_trajectory_controller:
+  ros__parameters:
+    type: joint_trajectory_controller/JointTrajectoryController
+    joints:
+      - shoulder_pan_joint
+      - shoulder_lift_joint
+      - elbow_joint
+      - wrist_1_joint
+      - wrist_2_joint
+      - wrist_3_joint
+    command_interfaces:
+      - position
+      # - velocity
+      # - effort
+
+    state_interfaces:
+      - position
+      - velocity
+
+    open_loop_control: True
+
+realtime_body_controller_real:
+  ros__parameters:
+    type: hsr_velocity_controller_ns/HsrVelocityController
+    joints:
+      - shoulder_pan_joint
+      - shoulder_lift_joint
+      - elbow_joint
+      - wrist_1_joint
+      - wrist_2_joint
+      - wrist_3_joint
+    p_gains: [0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+    i_gains: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    d_gains: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    feedforward_gains: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]

@@ -1,0 +1,24 @@
+shoulder_pan_joint:
+  joint_angular_position: [0.0]
+  joint_angular_velocity: [0.0]
+  joint_torque: [0.0]
+shoulder_lift_joint:
+  joint_angular_position: [0.0]
+  joint_angular_velocity: [0.0]
+  joint_torque: [0.0]
+elbow_joint:
+  joint_angular_position: [0.0]
+  joint_angular_velocity: [0.0]
+  joint_torque: [0.0]
+wrist_1_joint:
+  joint_angular_position: [0.0]
+  joint_angular_velocity: [0.0]
+  joint_torque: [0.0]
+wrist_2_joint:
+  joint_angular_position: [0.0]
+  joint_angular_velocity: [0.0]
+  joint_torque: [0.0]
+wrist_3_joint:
+  joint_angular_position: [0.0]
+  joint_angular_velocity: [0.0]
+  joint_torque: [0.0]
