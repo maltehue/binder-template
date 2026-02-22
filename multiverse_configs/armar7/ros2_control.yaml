@@ -10,6 +10,7 @@ arm_joint_trajectory_controller:
   ros__parameters:
     type: joint_trajectory_controller/JointTrajectoryController
     joints:
+      - ArmR1_Cla1
       - ArmR2_Sho1
       - ArmR3_Sho2
       - ArmR4_Sho3
@@ -34,8 +35,26 @@ realtime_body_controller_real:
     type: hsr_velocity_controller_ns/HsrVelocityController
     joints:
       - ArmR1_Cla1
-    p_gains: [0.1]
-    i_gains: [0.0]
-    d_gains: [0.0]
-    feedforward_gains: [1.0]
+      - ArmR2_Sho1
+      - ArmR3_Sho2
+      - ArmR4_Sho3
+      - ArmR5_Elb1
+      - ArmR6_Elb2
+      - ArmR7_Wrist_Hemisphere_A
+      - ArmR8_Wrist_Hemisphere_B
+      - ArmL1_Cla1
+      - ArmL2_Sho1
+      - ArmL3_Sho2
+      - ArmL4_Sho3
+      - ArmL5_Elb1
+      - ArmL6_Elb2
+      - ArmL7_Wrist_Hemisphere_A
+      - ArmL8_Wrist_Hemisphere_B
+      - Ankle
+      - Knee
+      - Hip
+    p_gains: [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+    i_gains: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    d_gains: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    feedforward_gains: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
 

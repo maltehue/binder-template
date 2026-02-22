@@ -1,6 +1,6 @@
 resources:
-  - ./../../jovyan/Multiverse/Multiverse-Utilities/scripts/
-  - ./../../Multiverse/Multiverse-Utilities/scripts/
+  - ./../../../jovyan/Multiverse/Multiverse-Utilities/scripts/
+  - ./../../../Multiverse/Multiverse-Utilities/scripts/
   - ./
 
 
@@ -51,10 +51,20 @@ multiverse_clients:
             ArmR6_Elb2_actuator: ArmR6_Elb2
             ArmR7_Wri1_actuator: ArmR7_Wrist_Hemisphere_A
             ArmR7_Wri2_actuator: ArmR8_Wrist_Hemisphere_B
+            ArmL1_Cla1_actuator: ArmL1_Cla1
+            ArmL2_Sho1_actuator: ArmL2_Sho1
+            ArmL3_Sho2_actuator: ArmL3_Sho2
+            ArmL4_Sho3_actuator: ArmL4_Sho3
+            ArmL5_Elb1_actuator: ArmL5_Elb1
+            ArmL6_Elb2_actuator: ArmL6_Elb2
+            ArmL7_Wri1_actuator: ArmL7_Wrist_Hemisphere_A
+            ArmL7_Wri2_actuator: ArmL8_Wrist_Hemisphere_B
+            Ankle: Ankle
+            Knee: Knee
+            Hip: Hip
           controllers:
             spawner:
               - joint_state_broadcaster
-                arm_joint_trajectory_controller
                 realtime_body_controller_real
 
 processes:
