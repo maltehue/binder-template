@@ -32,6 +32,10 @@ ros2 launch giskardpy_ros ur5_velocity.launch.py
 This launches the ros interfaces of the giskardpy high level motion controller (https://github.com/SemRoCo/giskardpy_ros/tree/tiago_velocity_semdt).
 It is part of the cognitive robot abstract machine (CRAM)(https://github.com/cram2/cognitive_robot_abstract_machine), which is also installed in this VRL, and that can be used to create a semantic digital twin of the simulated environment which is the basis for writing complex robot plans. 
 
+All the software installed in this VRL is listed in `binder/Dockerfile`.
+
+To build a new VRL from a new repo use this website: https://binder.intel4coro.de/
+
 ## Development
 
 ### Run and build docker image Locally (Under repo directory)
