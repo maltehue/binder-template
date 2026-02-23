@@ -21,6 +21,7 @@ RUN apt update && apt install -y --no-install-recommends \
     ros-jazzy-control-msgs \
     ros-jazzy-rqt-robot-steering \
     ros-jazzy-rqt-joint-trajectory-controller \
+    ros-jazzy-ur-description \
     graphviz graphviz-dev \
     python3-vcstool && \
     rm -rf /var/lib/apt/lists/*
@@ -89,6 +90,7 @@ RUN set -ex && \
 
 RUN set -ex && \
     cd ${HOME}/giskard_ws/src && git clone https://github.com/code-iai/iai_hsr.git -b ros2-humble && cd iai_hsr && rm -rf hsr_description hsr_navigation iai_hsr_bringup && \
+    git clone https://github.com/maltehue/ros2_robotiq_gripper.git -b iai_dualarm && cd ros2_robotiq_gripper && rm -rf robotiq_controllers robotiq_driver robotiq_hardware_tests && \
     cd ${HOME}/giskard_ws && /bin/bash -lc "set -ex; source /opt/ros/${ROS_DISTRO}/setup.bash && cd ${HOME}/giskard_ws && colcon build --cmake-args -DBUILD_TESTING=OFF"
 # Note: Sourcing the workspace at runtime should be done in the entrypoint or shell:
 #   source ~/giskard_ws/install/setup.bash
