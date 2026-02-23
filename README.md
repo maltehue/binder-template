@@ -7,7 +7,7 @@ It contains a ros2 controllable Mujoco simulation of a UR5e arm with a Robotiq G
 
 The minimal capabilities of the VRL can be seen in this Video. The VRL can be entered by clicking the button above. 
 
-[docs/video.mp4](docs/video.mp4)
+[Video](docs/VRB-Fera-compressed.mp4)
 
 In general, a VRL can be considered as a developement plattform in the web. Every user obtains an individual instance that is reset to the initial state after a restart. During interaction with the VRL the user can do whatever he wants. The initial state is defined by this repo. This repo can be forked to build your own VRL with extended functionality and to share it with the community.
 
