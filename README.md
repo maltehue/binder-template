@@ -1,89 +1,38 @@
-# binder-template
+[![Binder](https://binder.intel4coro.de/badge_logo.svg)](https://binder.intel4coro.de/v2/gh/maltehue/binder-template/armar7-stable)
 
-[![Binder](https://binder.intel4coro.de/badge_logo.svg)](https://binder.intel4coro.de/v2/gh/IntEL4CoRo/binder-template.git/main)
+This repo configures a Virtual Research Lab (VRL) of the Virtual Research Building (VRB) developed by the AICOR Intitute for Artifical Intelligence (https://ai.uni-bremen.de/).
+It contains a ros2 controllable Mujoco simulation of the Armar7 Robot developed by the H2T group at KIT (https://h2t.iar.kit.edu/)
 
-This is a template repo for running robotics research Jupyter Notebooks on Binderhub.
+The minimal capabilities of the VRL can be seen in this Video. The VRL can be entered by clicking the button above. 
 
-## Quick Start
 
-### Launcher Urls
 
-- JupyterLab: https://binder.intel4coro.de/v2/gh/IntEL4CoRo/binder-template.git/main?urlpath=lab/tree/notebooks/mujoco.ipynb
 
-- VScode: https://binder.intel4coro.de/v2/gh/IntEL4CoRo/binder-template.git/main?urlpath=vscode?folder=/home/repo
+In general, a VRL can be considered as a developement plattform in the web. Every user obtains an individual instance that is reset to the initial state after a restart. During interaction with the VRL the user can do whatever he wants. The initial state is defined by this repo. This repo can be forked to build your own VRL with extended functionality and to share it with the community.
 
-## Create a new VRB lab from this template
+## Running the Example
+The commands to run the example from the video are:
 
-1. Login to Github.
-
-1. Use this template repository to create a new repository or fork it. Forking will make it easier to sync with future updates.
-
-1. Clone your git repo, add your notebooks, python code, other files to the repo.
-
-1. Modify the [requirements.txt](requirements.txt) to install additional python packages.
-
-1. Modify the [binder/Dockerfile](binder/Dockerfile) if your project needs additional APT packages.
-
-    Examples:
-
-    ```Dockerfile
-    USER root
-    RUN apt update
-    RUN apt install -y ffmpeg
-    ```
-
-1. Use the following template to launch your notebook on Binder:
-
-    ```
-    https://binder.intel4coro.de/v2/gh/{GITHUB_USER_NAME}/{REPO_NAME}/{REPO_BRANCH}?urlpath=lab/tree/{NOTEBOOK_PATH}
-    ```
-
-    Replace each placeholder with your own information:
-
-      - `{GITHUB_USER_NAME}` => Your GitHub username.
-      - `{REPO_NAME}` => The name of your GitHub repository.
-      - `{REPO_BRANCH}` => The branch of your repository.
-      - `{NOTEBOOK_PATH}` => The relative path to the notebook file inside your repository
-      (for example: notebooks/mujoco.ipynb).
-  
-    The first time it is launched, it will take some time to build the Docker image.
-
-## Use custom base docker image
-
-You can also other based images, such as your own built docker images or official ROS images.
-And a few additional steps are required:
-
-1. Install JupyterLab
-1. Expose port 8888
-
-Example Dockerfile use ROS1 official image:
-
-```Dockerfile
-FROM ros:noetic-ros-base
-
-ENV SHELL=/bin/bash
-ENV DEBIAN_FRONTEND=noninteractive
-
-# Install jupyterlab and git
-RUN apt-get update && apt-get install -y python3-pip git
-RUN pip3 install jupyterlab
-
-# Expose port for jupyterlab
-EXPOSE 8888
-
-# Copy repo to the image (optional)
-ENV REPO_DIR=/home/repo
-RUN mkdir -p ${REPO_DIR}
-COPY . ${REPO_DIR}/
-WORKDIR ${REPO_DIR}
-# The entrypoint of the docker image
-COPY binder/entrypoint.sh /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+```bash
+/home/jovyan/Multiverse/Multiverse-Launch/bin/multiverse_launch /home/repo/multiverse_configs/armar7/armar.muv
 ```
+This creates a Multiverse Server (https://multiverseframework.readthedocs.io/en/latest/) that acts as a connector between ros2 processes and the mujoco simulation. The file `armar.muv` also configures thr ros2 controller manager as a Multiverse client. The file can be edited to load different ros2 controller. We use a standard joint trajectory controller for each arm and the torso.
+
+```bash
+/home/jovyan/libs/semantic_digital_twin_demo/mujoco/bin/simulate /home/jovyan/libs/semantic_digital_twin_demo/assets/armar7_scene.xml
+```
+This starts the mujoco simulations as a Multiverse Client. This is achieved by a plugin configuration at the end of the `armar7_scene.xml` file.
+The configuration of the .muv file and the plugin in the .xml file allow the ros2 controllers to write into the custom multiverse hardware interface of the mujoco simulation
+
+All the software installed in this VRL is listed in `binder/Dockerfile`.
+
+To build a new VRL from a new repo use this website: https://binder.intel4coro.de/
 
 ## Development
 
 ### Run and build docker image Locally (Under repo directory)
+
+First edit the docker-compose.yml to have `user: root`. This eases the interaction with the command line when inside the lab.
 
 - Build and run docker image:
 

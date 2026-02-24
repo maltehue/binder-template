@@ -19,7 +19,6 @@ RUN apt update && apt install -y --no-install-recommends \
     ros-jazzy-hardware-interface \
     ros-jazzy-controller-manager \
     ros-jazzy-control-msgs \
-    ros-jazzy-rqt-robot-steering \
     ros-jazzy-rqt-joint-trajectory-controller \
     graphviz graphviz-dev \
     python3-vcstool && \
