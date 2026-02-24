@@ -65,7 +65,12 @@ multiverse_clients:
           controllers:
             spawner:
               - joint_state_broadcaster
-                realtime_body_controller_real
+                right_arm_joint_trajectory_controller
+                left_arm_joint_trajectory_controller
+                torso_joint_trajectory_controller
+    ros2_run:
+      rviz2:
+        config: armar_rviz.rviz
 
 processes:
   - multiverse_initializing.py:
