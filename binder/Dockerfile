@@ -9,9 +9,6 @@ USER root
 COPY requirements.txt /tmp/requirements.txt
 RUN pip install -r /tmp/requirements.txt
 #===========================================================#
-RUN apt update && apt install -y --no-install-recommends \
-    ros-jazzy-rqt-robot-steering  && \
-    rm -rf /var/lib/apt/lists/*
 # ------------------------------------------------------------
 # Required
 # ------------------------------------------------------------
@@ -22,7 +19,7 @@ RUN apt update && apt install -y --no-install-recommends \
     ros-jazzy-hardware-interface \
     ros-jazzy-controller-manager \
     ros-jazzy-control-msgs \
-    # ros-jazzy-rqt-robot-steering \
+    ros-jazzy-rqt-robot-steering \
     ros-jazzy-rqt-joint-trajectory-controller \
     graphviz graphviz-dev \
     python3-vcstool && \
