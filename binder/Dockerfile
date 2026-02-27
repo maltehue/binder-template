@@ -77,7 +77,7 @@ ENV ROS_DISTRO=${ROS_DISTRO}
 # Create workspace, fetch sources, install Python reqs and system deps, then build
 RUN set -ex && \
     mkdir -p ${HOME}/giskard_ws/src && cd ${HOME}/giskard_ws/src && \
-    git clone https://github.com/SemRoCo/giskardpy_ros.git -b tiago_velocity_semdt && cd giskardpy_ros && git checkout e8ef712cc50453ca35f5ec9e6cea0da12ef8d63e && cd ../ &&\
+    git clone https://github.com/SemRoCo/giskardpy_ros.git -b tiago_velocity_semdt && cd giskardpy_ros && git checkout 4828cc48ab142c3d042f3b93c9921e4d72132f4f && cd ../ &&\
     git clone https://github.com/code-iai/iai_tiago_description.git -b ros2-main && \
     pip install -r giskardpy_ros/requirements.txt && \
     cd ${HOME}/giskard_ws && \
