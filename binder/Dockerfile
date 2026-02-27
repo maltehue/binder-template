@@ -9,42 +9,6 @@ USER root
 COPY requirements.txt /tmp/requirements.txt
 RUN pip install -r /tmp/requirements.txt
 #===========================================================#
-USER root
-ENV DEBIAN_FRONTEND=noninteractive
-ENV LANG=en_US.UTF-8
-
-# ------------------------------------------------------------
-# Basic system setup
-# ------------------------------------------------------------
-RUN apt update -qq && \
-    apt install -y -qq sudo locales software-properties-common gnupg2 curl wget \
-        vim git byobu tmux net-tools ca-certificates apt-transport-https \
-        build-essential lsb-release && \
-    echo "jovyan ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/jovyan && \
-    chmod 0440 /etc/sudoers.d/jovyan && \
-    locale-gen en_US.UTF-8
-
-# ------------------------------------------------------------
-# XFCE desktop + TurboVNC
-# ------------------------------------------------------------
-RUN apt update -qq && \
-    apt install -y -qq dbus-x11 xfce4 xfce4-session xfce4-settings xfce4-panel \
-        xorg xubuntu-icon-theme fonts-dejavu && \
-    apt remove -y xfce4-screensaver && \
-    rm -rf /var/lib/apt/lists/*
-
-# TurboVNC repository
-RUN wget -q -O- https://packagecloud.io/dcommander/turbovnc/gpgkey | \
-        gpg --dearmor >/etc/apt/trusted.gpg.d/TurboVNC.gpg && \
-    wget -q -O /etc/apt/sources.list.d/TurboVNC.list \
-        https://raw.githubusercontent.com/TurboVNC/repo/main/TurboVNC.list && \
-    apt update -qq && \
-    apt install -y -qq turbovnc && \
-    rm /etc/apt/sources.list.d/TurboVNC.list && \
-    rm -rf /var/lib/apt/lists/*
-
-ENV PATH=/opt/TurboVNC/bin:${PATH}
-ENV DISPLAY=:1
 # ------------------------------------------------------------
 # Required
 # ------------------------------------------------------------
