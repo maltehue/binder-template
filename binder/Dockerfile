@@ -33,8 +33,8 @@ RUN pip install poetry
 RUN set -ex && \
     poetry config virtualenvs.create false && \
     mkdir -p ${HOME}/libs && cd ${HOME}/libs && \
-    git clone https://github.com/maltehue/semantic_digital_twin_demo.git && cd semantic_digital_twin_demo && git checkout 5cfbb1a9c17555a51ddb32137ce56dcb5c49eabc && cd ../ \
-    git clone https://github.com/cram2/cognitive_robot_abstract_machine.git &&\
+    git clone https://github.com/maltehue/semantic_digital_twin_demo.git && \
+    git clone https://github.com/cram2/cognitive_robot_abstract_machine.git && cd cognitive_robot_abstract_machine && git checkout 5cfbb1a9c17555a51ddb32137ce56dcb5c49eabc && cd ../\
     cd cognitive_robot_abstract_machine && \
     sed -i '/^[[:space:]]*random_events[[:space:]]*=.*$/d' pyproject.toml && \
     poetry install
