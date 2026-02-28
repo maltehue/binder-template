@@ -15,6 +15,22 @@ multiverse_server:
 multiverse_clients:
   ros2:
     ros_nodes:
+      publishers:
+        odom:
+          - meta_data:
+              world_name: world
+              length_unit: m
+              angle_unit: rad
+              mass_unit: kg
+              time_unit: s
+              handedness: rhs
+            port: 7302
+            odom_topic: /odom
+            tf_topic: /tf
+            rate: 60
+            body: Platform_link
+            frame_id: map
+
       subscribers:
         cmd_vel:
           - meta_data:
@@ -65,9 +81,7 @@ multiverse_clients:
           controllers:
             spawner:
               - joint_state_broadcaster
-                right_arm_joint_trajectory_controller
-                left_arm_joint_trajectory_controller
-                torso_joint_trajectory_controller
+                realtime_body_controller_real
     ros2_run:
       rviz2:
         config: armar_rviz.rviz

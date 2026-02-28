@@ -28,7 +28,7 @@ from semantic_digital_twin.adapters.ros.visualization.viz_marker import (
 )
 from semantic_digital_twin.adapters.urdf import URDFParser
 from semantic_digital_twin.datastructures.definitions import GripperState, TorsoState
-from semantic_digital_twin.robots.tiago import TiagoMujoco
+from semantic_digital_twin.robots.armar7 import Armar7
 from semantic_digital_twin.spatial_types import HomogeneousTransformationMatrix
 from semantic_digital_twin.world_description.connections import OmniDrive
 from semantic_digital_twin.adapters.ros.world_fetcher import fetch_world_from_service
@@ -55,12 +55,12 @@ world = fetch_world_from_service(
         rclpy_node,
     )
 
-tiago = TiagoMujoco.from_world(world=world)
+armar = Armar7.from_world(world=world)
 
 
 
 
-context = Context(world, tiago, ros_node=rclpy_node)
+context = Context(world, armar, ros_node=rclpy_node)
 description = ParkArmsActionDescription([Arms.BOTH])
 plan = SequentialPlan(
     context,
