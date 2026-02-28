@@ -6,7 +6,11 @@ It contains a ros2 controllable Mujoco simulation of the Armar7 Robot developed 
 The minimal capabilities of the VRL can be seen in this Video. The VRL can be entered by clicking the button above. 
 The video shows the entry point of the VRL and how to enter the Virtual Desktop and the Web IDE (VSCode). The commands to replicate the demo shown in the video can befound below.
 
-TODO:  Upload video
+
+
+https://github.com/user-attachments/assets/349aec30-6c9a-4ef9-bb22-863bfa95d254
+
+
 
 In general, a VRL can be considered as a developement plattform in the web. Every user obtains an individual instance that is reset to the initial state after a restart. During interaction with the VRL the user can do whatever he wants. The initial state is defined by this repo. This repo can be forked to build your own VRL with extended functionality and to share it with the community.
 
