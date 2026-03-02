@@ -19,6 +19,7 @@ RUN apt update && apt install -y --no-install-recommends \
     ros-jazzy-hardware-interface \
     ros-jazzy-controller-manager \
     ros-jazzy-control-msgs \
+    ros-jazzy-xacro \
     ros-jazzy-rqt-joint-trajectory-controller \
     graphviz graphviz-dev \
     python3-vcstool && \
@@ -33,7 +34,7 @@ RUN set -ex && \
     poetry config virtualenvs.create false && \
     mkdir -p ${HOME}/libs && cd ${HOME}/libs && \
     git clone https://github.com/maltehue/semantic_digital_twin_demo.git && \
-    git clone https://github.com/cram2/cognitive_robot_abstract_machine.git && cd cognitive_robot_abstract_machine && git checkout 5cfbb1a9c17555a51ddb32137ce56dcb5c49eabc && cd ../ && \
+    git clone https://github.com/cram2/cognitive_robot_abstract_machine.git && cd cognitive_robot_abstract_machine && git checkout bd0264c8edf305216926c9ad0dfc20642f07352d && cd ../ && \
     cd cognitive_robot_abstract_machine && \
     sed -i '/^[[:space:]]*random_events[[:space:]]*=.*$/d' pyproject.toml && \
     poetry install
@@ -88,6 +89,8 @@ RUN set -ex && \
 
 RUN set -ex && \
     cd ${HOME}/giskard_ws/src && git clone https://github.com/code-iai/iai_hsr.git -b ros2-humble && cd iai_hsr && rm -rf hsr_description hsr_navigation iai_hsr_bringup && \
+    cd ${HOME}/giskard_ws/src && git clone https://github.com/code-iai/iai_robots.git -b ros-jazzy && cd iai_robots && find . -maxdepth 1 -type d ! -name 'iai_kit_armar7' -exec rm -rf {} \; && \
+    cd ${HOME}/giskard_ws/src && git clone https://github.com/code-iai/iai_maps.git -b ros-jazzy && cd iai_maps && find . -maxdepth 1 -type d ! -name 'iai_kit_mobile_lab' -exec rm -rf {} \; && \
     cd ${HOME}/giskard_ws && /bin/bash -lc "set -ex; source /opt/ros/${ROS_DISTRO}/setup.bash && cd ${HOME}/giskard_ws && colcon build --cmake-args -DBUILD_TESTING=OFF"
 # Note: Sourcing the workspace at runtime should be done in the entrypoint or shell:
 #   source ~/giskard_ws/install/setup.bash
