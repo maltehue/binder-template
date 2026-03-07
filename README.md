@@ -37,8 +37,8 @@ ros2 run rqt_joint_trajectory_controller rqt_joint_trajectory_controller
 ```
 This is a standard ros2 tool to command the activated controllers. Other tools can be isnatlled during runtime using the terminal or offline by altering the Dockerfile.
 
-### Running an Example with CRAM
-CRAM (https://github.com/cram2/cognitive_robot_abstract_machine) is a cognitve architecture for robot control programms. It represents semantic world knowledge, represents and executes generalized robot manipulation plans, utilizie whole-body robot motion control and much more.
+### Running an Example with CRAM and Physics Simulation
+CRAM (https://github.com/cram2/cognitive_robot_abstract_machine) is a cognitve architecture for robot control programms. It represents semantic world knowledge, represents and executes generalized robot manipulation plans, utilizie whole-body robot motion control and much more. If you are interested to see the code in the VRL, open VSCode and open the folder `/home/jovyan/libs/cognitive_robot_abstract_machine/`,
 
 To use CRAM with the simulated robot we need to change the control interface from a position controller to a velocity controller, because Giskard (the whole-body motion controller in CRAM) outputs joint velocities. Currently the mujoco simulations are setup with position based actuators, therefore we employ a custom ros2 controller (https://github.com/code-iai/iai_hsr/tree/ros2-jazzy/hsr_velocity_controller) that accepts velocity commands from Giskards and translates them into position commands for the ros2 Hardware Interface.
 
@@ -78,6 +78,19 @@ python /home/repo/demo.py
 ```
 
 To execute a minimal CRAM plan for the ARMAR7. By opening the file in the Web VSCode application and configuring the correct venv (as shown in the video) you obtain code suggestions to faccilitate writing your own robot plans. Documentation on the CRAM system can be found here (https://cram2.github.io/cognitive_robot_abstract_machine/).
+
+### Running an Example with CRAM without Physics Simulation
+
+To start RViz2 open a new terminal and run
+```bash
+rviz2
+```
+
+Then open another terminal and run
+
+```bash
+python /home/repo/no_simulation_demo.py
+```
 
 ## Development
 
