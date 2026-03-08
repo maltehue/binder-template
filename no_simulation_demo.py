@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 
 import numpy as np
 
@@ -26,6 +27,7 @@ from semantic_digital_twin.robots.armar7 import Armar7
 from semantic_digital_twin.spatial_types import (
     HomogeneousTransformationMatrix,
 )
+from semantic_digital_twin.utils import get_path_to_project_root
 from semantic_digital_twin.world_description.connections import (
     OmniDrive,
 )
@@ -48,16 +50,13 @@ world = URDFParser.from_file(environment_path).parse()
 with world.modify_world():
     world.merge_world(robot_world)
 
+project_root = get_path_to_project_root(Path(__file__).resolve())
 milk_world = STLParser(
-    os.path.join(
-        os.path.dirname(__file__), "..", "..", "resources", "objects", "milk.stl"
-    )
+    os.path.join(project_root, "resources", "objects", "milk.stl")
 ).parse()
 cereal_world = STLParser(
     os.path.join(
-        os.path.dirname(__file__),
-        "..",
-        "..",
+        project_root,
         "resources",
         "objects",
         "breakfast_cereal.stl",
