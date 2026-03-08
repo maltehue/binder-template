@@ -1,8 +1,5 @@
 import os
 from pathlib import Path
-
-import numpy as np
-
 from pycram.datastructures.dataclasses import Context
 from pycram.datastructures.enums import Arms
 from pycram.datastructures.pose import PoseStamped
@@ -20,7 +17,6 @@ from semantic_digital_twin.adapters.ros.visualization.viz_marker import (
     VizMarkerPublisher,
 )
 from semantic_digital_twin.adapters.urdf import URDFParser
-from semantic_digital_twin.reasoning.world_reasoner import WorldReasoner
 from semantic_digital_twin.robots.armar7 import Armar7
 from semantic_digital_twin.spatial_types import (
     HomogeneousTransformationMatrix,
@@ -32,25 +28,28 @@ from semantic_digital_twin.world_description.connections import (
 from semantic_digital_twin.world_description.utils import world_with_urdf_factory
 import pycram
 
-robot_path = os.path.join("package://iai_kit_armar7/urdf/Armar7.urdf")
 
+# %% Environment Setup
+# environment_path = os.path.join("package://iai_apartment/urdf/apartment.urdf")
+# environment_path = os.path.join("package://iai_kit_mobile_lab/urdf/mobile_kitchen.urdf")
+environment_path = os.path.join("package://iai_kit_mobile_lab/urdf/R007.urdf")
+world = URDFParser.from_file(environment_path).parse()
+
+# %% Robot Setup
+robot_path = os.path.join("package://iai_kit_armar7/urdf/Armar7.urdf")
 robot_starting_pose = HomogeneousTransformationMatrix.from_xyz_rpy(
     3.8,
     8.40,
     0,
 )
-
 robot_world = world_with_urdf_factory(
     robot_path, Armar7, OmniDrive, robot_starting_pose
 )
 
-# environment_path = os.path.join("package://iai_kit_mobile_lab/urdf/mobile_kitchen.urdf")
-# environment_path = os.path.join("package://iai_apartment/urdf/apartment.urdf")
-environment_path = os.path.join("package://iai_kit_mobile_lab/urdf/R007.urdf")
-world = URDFParser.from_file(environment_path).parse()
 with world.modify_world():
     world.merge_world(robot_world)
 
+# %% Spawn Objects
 project_root = get_path_to_project_root(Path(pycram.__file__).resolve())
 milk_world = STLParser(
     os.path.join(project_root, "resources", "objects", "milk.stl")
@@ -77,6 +76,7 @@ with world.modify_world():
         ),
     )
 
+# %% Visualization
 try:
     import rclpy
 
@@ -87,14 +87,9 @@ try:
 except ImportError:
     pass
 
+# %% Demo
 context = Context.from_world(world)
 armar7 = world.get_semantic_annotations_by_type(Armar7)[0]
-
-with world.modify_world():
-    world_reasoner = WorldReasoner(world)
-    world_reasoner.reason()
-
-# %% Demo
 milk_place_pose = PoseStamped.from_list(
     [2.2, 7.6, 0.865], [0, 0, 1, 0], frame=world.root
 )
@@ -111,6 +106,7 @@ with simulated_robot:
                 reachable_arm=Arms.LEFT,
                 reachable_for=armar7,
             ),
+            teleport=False,
         ),
         PickUpActionDescription(
             world.get_body_by_name("milk.stl"),
@@ -125,6 +121,7 @@ with simulated_robot:
                 reachable_for=armar7,
                 grasp_descriptions=pickup_loc.last_result_grasp,
             ),
+            teleport=False,
         ),
         PlaceActionDescription(
             world.get_body_by_name("milk.stl"),
