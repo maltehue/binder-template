@@ -109,6 +109,9 @@ WORKDIR ${REPO_DIR}
 # Set VSCODE default directory
 ENV CODE_WORKING_DIRECTORY=${REPO_DIR}
 
+# Copy RViz config
+COPY default.rviz /home/jovyan/.rviz2/default.rviz
+
 # The entrypoint of the docker image
 COPY binder/entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
