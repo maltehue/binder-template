@@ -34,7 +34,7 @@ RUN set -ex && \
     poetry config virtualenvs.create false && \
     mkdir -p ${HOME}/libs && cd ${HOME}/libs && \
     git clone https://github.com/maltehue/semantic_digital_twin_demo.git && \
-    git clone https://github.com/LucaKro/cognitive_robot_abstract_machine.git -b armar7_demo && \
+    git clone https://github.com/LucaKro/cognitive_robot_abstract_machine.git && cd cognitive_robot_abstract_machine && git checkout armar7_demo && \
     cd cognitive_robot_abstract_machine && \
     sed -i '/^[[:space:]]*random_events[[:space:]]*=.*$/d' pyproject.toml && \
     poetry install

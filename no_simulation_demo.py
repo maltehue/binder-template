@@ -4,19 +4,17 @@ from pathlib import Path
 import numpy as np
 
 from pycram.datastructures.dataclasses import Context
-from pycram.datastructures.enums import Arms, ApproachDirection, VerticalAlignment
-from pycram.datastructures.grasp import GraspDescription
+from pycram.datastructures.enums import Arms
 from pycram.datastructures.pose import PoseStamped
 from pycram.designators.location_designator import CostmapLocation
 from pycram.language import SequentialPlan
-from pycram.motion_executor import simulated_robot, simulated_robot_without_collision
+from pycram.motion_executor import simulated_robot
 from pycram.robot_plans import (
     ParkArmsActionDescription,
     NavigateActionDescription,
     PickUpActionDescription,
     PlaceActionDescription,
 )
-from pycram.robot_plans import TransportActionDescription
 from semantic_digital_twin.adapters.mesh import STLParser
 from semantic_digital_twin.adapters.ros.visualization.viz_marker import (
     VizMarkerPublisher,
@@ -32,11 +30,14 @@ from semantic_digital_twin.world_description.connections import (
     OmniDrive,
 )
 from semantic_digital_twin.world_description.utils import world_with_urdf_factory
+import pycram
 
 robot_path = os.path.join("package://iai_kit_armar7/urdf/Armar7.urdf")
 
 robot_starting_pose = HomogeneousTransformationMatrix.from_xyz_rpy(
-    3.5, 2.5, 0, yaw=np.pi / 2
+    3.8,
+    8.40,
+    0,
 )
 
 robot_world = world_with_urdf_factory(
@@ -44,13 +45,13 @@ robot_world = world_with_urdf_factory(
 )
 
 # environment_path = os.path.join("package://iai_kit_mobile_lab/urdf/mobile_kitchen.urdf")
-# environment_path = os.path.join("package://iai_kit_mobile_lab/urdf/R007.urdf")
-environment_path = os.path.join("package://iai_apartment/urdf/apartment.urdf")
+# environment_path = os.path.join("package://iai_apartment/urdf/apartment.urdf")
+environment_path = os.path.join("package://iai_kit_mobile_lab/urdf/R007.urdf")
 world = URDFParser.from_file(environment_path).parse()
 with world.modify_world():
     world.merge_world(robot_world)
 
-project_root = get_path_to_project_root(Path(__file__).resolve())
+project_root = get_path_to_project_root(Path(pycram.__file__).resolve())
 milk_world = STLParser(
     os.path.join(project_root, "resources", "objects", "milk.stl")
 ).parse()
@@ -66,13 +67,13 @@ with world.modify_world():
     world.merge_world_at_pose(
         milk_world,
         HomogeneousTransformationMatrix.from_xyz_rpy(
-            2.97, 2, 1.05, reference_frame=world.root
+            5.3, 8.40, 1.09, reference_frame=world.root
         ),
     )
     world.merge_world_at_pose(
         cereal_world,
         HomogeneousTransformationMatrix.from_xyz_rpy(
-            2.97, 1.8, 1.05, reference_frame=world.root
+            5.3, 8.25, 1.09, reference_frame=world.root
         ),
     )
 
@@ -95,7 +96,7 @@ with world.modify_world():
 
 # %% Demo
 milk_place_pose = PoseStamped.from_list(
-    [4.9, 3.3, 0.8], [0, 0, -1, 1], frame=world.root
+    [2.2, 7.6, 0.865], [0, 0, 1, 0], frame=world.root
 )
 
 with simulated_robot:
