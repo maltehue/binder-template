@@ -85,6 +85,7 @@ To start RViz2 open a new terminal and run
 ```bash
 rviz2
 ```
+Add a MarkerArray to RViz, which listens to the topic `/semworld/viz_marker`, and hast the durability policy set to `Transient Local`.
 
 Then open another terminal and run
 
