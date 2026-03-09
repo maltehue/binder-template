@@ -22,6 +22,7 @@ RUN apt update && apt install -y --no-install-recommends \
     ros-jazzy-xacro \
     ros-jazzy-rqt-joint-trajectory-controller \
     graphviz graphviz-dev \
+    tmux \
     python3-vcstool && \
     rm -rf /var/lib/apt/lists/*
 
@@ -95,7 +96,14 @@ RUN set -ex && \
 # Note: Sourcing the workspace at runtime should be done in the entrypoint or shell:
 #   source ~/giskard_ws/install/setup.bash
 
+RUN set -ex && \
+    git config --global url."https://github.com/".insteadOf "git@github.com:" && \
+    cd ${HOME}/libs && git clone --recurse-submodules https://github.com/HoangGiang93/RIG2026.git
+
 RUN pip install "setuptools<81"
+
+COPY init_demo.bash /tmp/init_demo.bash
+RUN bash /tmp/init_demo.bash
 
 USER root
 # Copy content to the image
