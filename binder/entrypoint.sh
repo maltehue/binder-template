@@ -6,5 +6,9 @@ source ${MV_ROOT}/Multiverse-Launch/src/multiverse_connectors/multiverse_ros_con
 source ${MV_ROOT}/../giskard_ws/install/setup.bash
 # Add other startup programs here
 
+cd ${HOME}/libs/cognitive_robot_abstract_machine
+git pull
+cd ${REPO_DIR}
+
 # The following line will allow the binderhub start Jupyterlab, should be at the end of the entrypoint.
 exec "$@"
