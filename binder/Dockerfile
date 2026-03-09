@@ -40,32 +40,6 @@ RUN set -ex && \
     sed -i '/^[[:space:]]*random_events[[:space:]]*=.*$/d' pyproject.toml && \
     poetry install
 
-# ------------------------------------------------------------
-# Multiverse installation
-# ------------------------------------------------------------
-
-ENV MV_ROOT=${HOME}/Multiverse
-ENV MULTIVERSE_REPO=https://github.com/Multiverse-Framework/Multiverse
-ENV MULTIVERSE_BRANCH=main
-
-RUN set -ex && \
-    mkdir -p ${MV_ROOT} && \
-    cd ${HOME} && \
-    git clone --recurse-submodules --depth 1 --branch ${MULTIVERSE_BRANCH} ${MULTIVERSE_REPO} ${MV_ROOT} || \
-    (cd ${MV_ROOT} && git submodule update --init --recursive) && \
-    cd ${MV_ROOT} && \
-    if [ -f "./Multiverse-Launch/requirements.txt" ]; then \
-    pip install --no-cache-dir -r ./Multiverse-Launch/requirements.txt; fi && \
-    if [ -f "./Multiverse-Utilities/requirements.txt" ]; then \
-    pip install --no-cache-dir -r ./Multiverse-Utilities/requirements.txt; fi && \
-    if [ -f "./Multiverse-Launch/src/multiverse_connectors/multiverse_simulators_connector/src/mujoco_connector/requirements.txt" ]; then \
-    pip install --no-cache-dir -r ./Multiverse-Launch/src/multiverse_connectors/multiverse_simulators_connector/src/mujoco_connector/requirements.txt; fi && \
-    if [ -d "./Multiverse-Launch/src/multiverse_connectors/multiverse_ros_connector/ros_ws/multiverse_ws2" ]; then \
-    cd ./Multiverse-Launch/src/multiverse_connectors/multiverse_ros_connector/ros_ws/multiverse_ws2 && \
-    /bin/bash -c "source /opt/ros/jazzy/setup.bash && colcon build --symlink-install"; \
-    cd ${MV_ROOT}; \
-    fi
-
 
 # ------------------------------------------------------------
 # ROS2 workspace: giskardpy_ros (clone, deps, build)
@@ -79,7 +53,6 @@ ENV ROS_DISTRO=${ROS_DISTRO}
 RUN set -ex && \
     mkdir -p ${HOME}/giskard_ws/src && cd ${HOME}/giskard_ws/src && \
     git clone https://github.com/SemRoCo/giskardpy_ros.git -b tiago_velocity_semdt && cd giskardpy_ros && git checkout ee5a19cbffd20f5ec1bbd26a7fcd1d364ead8488 && cd ../ &&\
-    git clone https://github.com/code-iai/iai_tiago_description.git -b ros2-main && \
     pip install -r giskardpy_ros/requirements.txt && \
     cd ${HOME}/giskard_ws && \
     vcs import src < src/giskardpy_ros/$ROS_DISTRO.repos && \
@@ -90,8 +63,6 @@ RUN set -ex && \
 
 RUN set -ex && \
     cd ${HOME}/giskard_ws/src && git clone https://github.com/code-iai/iai_hsr.git -b ros2-humble && cd iai_hsr && rm -rf hsr_description hsr_navigation iai_hsr_bringup && \
-    cd ${HOME}/giskard_ws/src && git clone https://github.com/code-iai/iai_robots.git -b ros-jazzy && cd iai_robots && find . -maxdepth 1 -type d ! -name 'iai_kit_armar7' -exec rm -rf {} \; && \
-    cd ${HOME}/giskard_ws/src && git clone https://github.com/code-iai/iai_maps.git -b ros-jazzy && cd iai_maps && find . -maxdepth 1 -type d ! -name 'iai_kit_mobile_lab' -exec rm -rf {} \; && \
     cd ${HOME}/giskard_ws && /bin/bash -lc "set -ex; source /opt/ros/${ROS_DISTRO}/setup.bash && cd ${HOME}/giskard_ws && colcon build --cmake-args -DBUILD_TESTING=OFF"
 # Note: Sourcing the workspace at runtime should be done in the entrypoint or shell:
 #   source ~/giskard_ws/install/setup.bash
