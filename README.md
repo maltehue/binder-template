@@ -17,7 +17,7 @@ Make sure to open a Virtual Desktop in the VRL before running the following.
 The commands to run the example from the video are:
 
 ```bash
-bash /home/jovyan/libs/RIG2026/demo/run_demo.bash
+bash /home/repo/run_demo.bash
 ```
 This command uses tmux to start multiple processes simultaneously. It creates a Multiverse Server (https://multiverseframework.readthedocs.io/en/latest/) that acts as a connector between ros2 processes and the mujoco simulation. It also configures the ros2 controller manager as a Multiverse client. We use a standard joint trajectory controller for each arm, the torso and the head.
 
