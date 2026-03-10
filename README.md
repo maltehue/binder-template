@@ -25,9 +25,9 @@ The commands to run the example from the video are:
 This creates a Multiverse Server (https://multiverseframework.readthedocs.io/en/latest/) that acts as a connector between ros2 processes and the mujoco simulation. The file `armar.muv` also configures the ros2 controller manager as a Multiverse client. The file can be edited to load different ros2 controllers. We use a standard joint trajectory controller for each arm and the torso.
 
 ```bash
-/home/jovyan/libs/semantic_digital_twin_demo/mujoco/bin/simulate /home/jovyan/libs/semantic_digital_twin_demo/assets/armar7_scene.xml
+/home/jovyan/libs/semantic_digital_twin_demo/mujoco/bin/simulate /home/jovyan/libs/semantic_digital_twin_demo/assets/armar7_in_kitchen.xml
 ```
-This starts the mujoco simulations as a Multiverse Client. This is achieved by a plugin configuration at the end of the `armar7_scene.xml` file.
+This starts the mujoco simulations as a Multiverse Client. This is achieved by a plugin configuration at the end of the `armar7_in_kitchen.xml` file.
 The configuration of the .muv file and the plugin in the .xml file allow the ros2 controllers to write into the custom multiverse hardware interface of the mujoco simulation.
 
 **Note**: Rendering of the Mujoco Gui is very slow in the docker-based VRL. To increase the Framerate, use the menu on the left side of the GUI, scroll down to rendering and disable all the OpenGL Effects except for culling faces.
