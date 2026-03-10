@@ -71,10 +71,10 @@ ros2 launch giskardpy_ros armar_velocity.launch.py
 ```
 
 Now Giskard is running and publishes an Interactive Marker that can be visualized in RViz2 and be used to command end effector goals.
-Alternatively run the file `demo.py` by calling
+Alternatively run the file `lab1.py` by calling
 
 ```bash
-python /home/repo/demo.py
+python /home/repo/lab1.py
 ```
 
 To execute a minimal CRAM plan for the Armar7. By opening the file in the Web VSCode application and configuring the correct venv (as shown in the video) you get code suggestions to facilitate writing your own robot plans. Documentation on the CRAM system can be found here (https://cram2.github.io/cognitive_robot_abstract_machine/).
@@ -89,7 +89,7 @@ rviz2
 Then open another terminal and run
 
 ```bash
-python /home/repo/no_simulation_demo.py
+python /home/repo/lab2.py
 ```
 
 ## Development
