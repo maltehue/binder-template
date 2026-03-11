@@ -12,7 +12,7 @@ VENV_DIR="${DEMO_DIR}/multiverse"
 MUJOCO_DIR="${DEMO_DIR}/mujoco-${MUJOCO_VERSION}"
 MULTIVERSE_DIR="/home/jovyan/libs/RIG2026/Multiverse"
 URDF_ROS2="${DEMO_DIR}/assets/urdf/garmi.urdf"
-MJCF_SCENE="${DEMO_DIR}/assets/mjcf/scene_position_with_multiverse.xml"
+MJCF_SCENE="${DEMO_DIR}/assets/mjcf/garmi_apartment_with_multiverse.xml"
 
 ROS_DISTRO="${ROS_DISTRO:-jazzy}"
 ROS_SETUP="/opt/ros/${ROS_DISTRO}/setup.bash"
