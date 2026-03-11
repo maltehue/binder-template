@@ -25,7 +25,7 @@ The second command starts a simplfied Mujoco environment of the real world lab e
 
 
 
-https://github.com/user-attachments/assets/b5663fc9-e836-445a-b0ba-9de35b0a5cee
+https://github.com/user-attachments/assets/23bb63e7-949d-4dd3-9402-f5e301ccfc49
 
 
 
