@@ -21,8 +21,15 @@ or
 ```bash
 bash /home/repo/run_demo_simplified_apartment.bash
 ```
+The second command starts a simplfied Mujoco environment of the real world lab environment replicated in the VR Demo below. Currently we are adapting the exisitng models for a smooth Mujoco Simulation of the whole apartment.
 
-These commands use tmux to start multiple processes simultaneously. It creates a Multiverse Server (https://multiverseframework.readthedocs.io/en/latest/) that acts as a connector between ros2 processes and the mujoco simulation. It also configures the ros2 controller manager as a Multiverse client. We use a standard joint trajectory controller for each arm, the torso and the head.
+
+
+https://github.com/user-attachments/assets/b5663fc9-e836-445a-b0ba-9de35b0a5cee
+
+
+
+Both of the above commands use tmux to start multiple processes simultaneously. It creates a Multiverse Server (https://multiverseframework.readthedocs.io/en/latest/) that acts as a connector between ros2 processes and the mujoco simulation. It also configures the ros2 controller manager as a Multiverse client. We use a standard joint trajectory controller for each arm, the torso and the head.
 
 It also starts the mujoco simulations as a Multiverse Client. This is achieved by a plugin configuration at the end of the `/home/jovyan/libs/RIG2026/demo/assets/mjcf/scene_position_with_multiverse.xml` file.
 The configuration of the ros2 processes and the plugin in the .xml file allow the ros2 controllers to write into the custom multiverse hardware interface of the mujoco simulation.
