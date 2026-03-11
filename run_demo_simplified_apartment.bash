@@ -1,0 +1,189 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# --------------------------
+# Config
+# --------------------------
+SESH="teleop_garmi"
+MUJOCO_VERSION="${MUJOCO_VERSION:-3.5.0}"
+
+DEMO_DIR="/home/jovyan/libs/RIG2026/demo"
+VENV_DIR="${DEMO_DIR}/multiverse"
+MUJOCO_DIR="${DEMO_DIR}/mujoco-${MUJOCO_VERSION}"
+MULTIVERSE_DIR="/home/jovyan/libs/RIG2026/Multiverse"
+URDF_ROS2="${DEMO_DIR}/assets/urdf/garmi.urdf"
+MJCF_SCENE="${DEMO_DIR}/assets/mjcf/scene_position_with_multiverse.xml"
+
+ROS_DISTRO="${ROS_DISTRO:-jazzy}"
+ROS_SETUP="/opt/ros/${ROS_DISTRO}/setup.bash"
+
+COLCON_WS="${MULTIVERSE_DIR}/MultiverseConnector/ros_connector/ros_ws/multiverse_ws2"
+ROSPKG_SETUP="${COLCON_WS}/install/setup.bash"
+
+REQ_LOCAL="${DEMO_DIR}/requirements.txt"
+REQ_ROOT="requirements.txt"
+
+# --------------------------
+# Helpers
+# --------------------------
+log()  { echo -e "\n\033[1;32m[+] $*\033[0m"; }
+warn() { echo -e "\n\033[1;33m[!] $*\033[0m"; }
+die()  { echo -e "\n\033[1;31m[✗] $*\033[0m" >&2; exit 1; }
+
+need_cmd() { command -v "$1" >/dev/null 2>&1 || die "Missing command: $1"; }
+
+tmux_send() {
+  local target="$1"; shift
+  tmux send-keys -t "$target" "$*" C-m
+}
+
+ros_source() {
+  local overlay="${1:-}"
+  set +u
+  # shellcheck disable=SC1090
+  source "$ROS_SETUP"
+  if [[ -n "$overlay" ]]; then
+    # shellcheck disable=SC1090
+    source "$overlay"
+  fi
+  set -u
+}
+
+if tmux has-session -t "$SESH" 2>/dev/null; then
+  exec tmux attach -t "$SESH"
+fi
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
+cd ..
+
+need_cmd tmux
+need_cmd python3
+need_cmd wget
+need_cmd tar
+
+[[ -f "$ROS_SETUP" ]] || die "ROS setup not found: $ROS_SETUP"
+
+echo "$VENV_DIR"
+
+if [[ ! -d "$VENV_DIR" ]]; then
+  log "Creating venv: $VENV_DIR"
+  mkdir -p "$(dirname "$VENV_DIR")"
+  python3 -m venv "$VENV_DIR"
+  # shellcheck disable=SC1090
+  source "$VENV_DIR/bin/activate"
+  python -m pip install -U pip
+  pip install -r "$REQ_LOCAL"
+  (cd ${MULTIVERSE_DIR}; pip install -r "$REQ_ROOT"; pip install -e "MultiverseConnector/ros_connector")
+else
+  log "Using existing venv: $PWD/$VENV_DIR"
+  # shellcheck disable=SC1090
+  source "$VENV_DIR/bin/activate"
+fi
+
+if [[ ! -d "$MUJOCO_DIR" ]]; then
+  log "Downloading MuJoCo ${MUJOCO_VERSION} -> ${MUJOCO_DIR}"
+  mkdir -p "$DEMO_DIR"
+  wget -qO- "https://github.com/google-deepmind/mujoco/releases/download/${MUJOCO_VERSION}/mujoco-${MUJOCO_VERSION}-linux-x86_64.tar.gz" \
+    | tar -xz -C "$DEMO_DIR"
+fi
+
+mkdir -p "${MUJOCO_DIR}/bin/mujoco_plugin"
+if compgen -G "${MULTIVERSE_DIR}/MultiverseConnector/mujoco_connector/mujoco-${MUJOCO_VERSION}/*.so" >/dev/null; then
+  cp -f "${MULTIVERSE_DIR}/MultiverseConnector/mujoco_connector/mujoco-${MUJOCO_VERSION}/"*.so "${MUJOCO_DIR}/bin/mujoco_plugin/" || true
+else
+  warn "No plugin .so found at Multiverse/MultiverseConnector/mujoco_connector/mujoco-${MUJOCO_VERSION}/*.so"
+fi
+
+ros_source ""
+
+if [[ ! -f "$ROSPKG_SETUP" ]]; then
+  log "Building colcon workspace: ${COLCON_WS}"
+  need_cmd colcon
+  pushd "$COLCON_WS" >/dev/null
+  colcon build --symlink-install
+  popd >/dev/null
+fi
+
+ros_source "$ROSPKG_SETUP"
+
+log "Starting tmux session: ${SESH}"
+tmux new-session -d -s "$SESH" -n main
+tmux set-option -t "$SESH" -g mouse on
+tmux set-option -t "$SESH" -g history-limit 200000
+
+tmux split-window -t "$SESH":0 -h
+tmux split-window -t "$SESH":0 -h
+
+mapfile -t COLS < <(tmux list-panes -t "$SESH":0 -F '#{pane_id}' | head -n 3)
+
+for col in "${COLS[@]}"; do
+  tmux split-window -t "$col" -v
+  tmux split-window -t "$col" -v
+done
+
+tmux select-layout -t "$SESH":0 tiled
+
+tmux_send "$SESH":0.0 \
+"
+${MULTIVERSE_DIR}/MultiverseServer/bin/multiverse_server_cpp --transport zmq --bind tcp://127.0.0.1:7000 --transport tcp --bind 192.168.0.101:8000
+"
+
+tmux_send "$SESH":0.1 \
+"
+source '${VENV_DIR}/bin/activate'
+python ${MULTIVERSE_DIR}/MultiverseUtilities/multiverse_initializing.py --data_path=${DEMO_DIR}/config/multiverse.yaml
+export MUJOCO_VERSION='${MUJOCO_VERSION}'
+${MUJOCO_DIR}/bin/simulate ${MJCF_SCENE}
+"
+
+tmux_send "$SESH":0.2 \
+"
+set +u
+source '${ROS_SETUP}'
+source '${ROSPKG_SETUP}'
+set -u
+ros2 run robot_state_publisher robot_state_publisher --ros-args --remap /robot_description:=/robot_description -p robot_description:=\"\$(xacro ${URDF_ROS2} | sed 's|file://|file://${PWD}/demo/assets/urdf/|g')\" -r tf:=/tf
+"
+
+tmux_send "$SESH":0.3 \
+"
+set +u
+source '${ROS_SETUP}'
+source '${ROSPKG_SETUP}'
+set -u
+ros2 run controller_manager ros2_control_node --ros-args --remap /robot_description:=/robot_description --params-file '${DEMO_DIR}/config/ros2_control.yaml'
+"
+
+tmux_send "$SESH":0.4 \
+"
+set +u
+source '${ROS_SETUP}'
+source '${ROSPKG_SETUP}'
+set -u
+ros2 run controller_manager spawner joint_state_broadcaster garmi_lift_controller garmi_arm_0_controller garmi_arm_1_controller garmi_head_controller --param-file ${DEMO_DIR}/config/ros2_control.yaml
+ros2 run rviz2 rviz2 --display-config ${DEMO_DIR}/config/rviz2.rviz
+"
+
+tmux_send "$SESH":0.7 \
+"
+source '${VENV_DIR}/bin/activate'
+set +u
+source '${ROS_SETUP}'
+source '${ROSPKG_SETUP}'
+set -u
+multiverse_ros_connector --subscribers=\"{'joint_state':[{'meta_data':{'world_name':'world','length_unit':'m','angle_unit':'rad','mass_unit':'kg','time_unit':'s','handedness':'rhs'},'port':7300,'topic':'/joint_states','rate':60,'joint_types':{'lift_0_lower_joint':'prismatic', 'lift_0_upper_joint':'prismatic', 'arm_0_gripper_fr3_finger_joint1':'prismatic', 'arm_0_gripper_fr3_finger_joint2':'prismatic', 'arm_1_gripper_fr3_finger_joint1':'prismatic', 'arm_1_gripper_fr3_finger_joint2':'prismatic'}}]}\"
+"
+
+tmux_send "$SESH":0.8 \
+"
+source '${VENV_DIR}/bin/activate'
+set +u
+source '${ROS_SETUP}'
+source '${ROSPKG_SETUP}'
+set -u
+multiverse_ros_connector --subscribers=\"{'cmd_vel':[{'meta_data':{'world_name':'world','length_unit':'m','angle_unit':'rad','mass_unit':'kg','time_unit':'s','handedness':'rhs'},'port':7330,'topic':'/cmd_vel','rate':60,'body':'garmi'}]}\"
+"
+
+tmux select-pane -t "$SESH":0.0
+exec tmux attach -t "$SESH"

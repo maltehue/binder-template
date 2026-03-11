@@ -69,7 +69,7 @@ RUN set -ex && \
 
 RUN set -ex && \
     git config --global url."https://github.com/".insteadOf "git@github.com:" && \
-    cd ${HOME}/libs && git clone --recurse-submodules https://github.com/HoangGiang93/RIG2026.git
+    cd ${HOME}/libs && git clone --recurse-submodules https://github.com/HoangGiang93/RIG2026.git && cd RIG2026 && git checkout b8d69b1018ad4504635a18cb3c34755d0b82294d
 
 RUN pip install "setuptools<81"
 
