@@ -55,10 +55,7 @@ world = fetch_world_from_service(
         rclpy_node,
     )
 
-armar = Armar7.from_world(world=world)
-
-
-
+armar = world.get_semantic_annotations_by_type(Armar7)[0]
 
 context = Context(world, armar, ros_node=rclpy_node)
 description = ParkArmsActionDescription([Arms.BOTH])
