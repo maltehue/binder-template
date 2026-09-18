@@ -40,7 +40,7 @@ https://binder.intel4coro.de/v2/gh/{USER}/{REPO}/{BRANCH}?urlpath={INTERFACE}/{P
 
 ## Let an AI agent set up your lab (optional)
 
-This repository contains an agent skill, [`skills/setup-vrb-lab/SKILL.md`](skills/setup-vrb-lab/SKILL.md), that walks you through turning an existing project into a VRB lab: it analyzes your project, asks about ROS version and setup flavor (minimal or CRAM preinstalled), generates the `binder/` files, proposes a local Docker build test, and only then guides you through the GitHub steps. It never runs git commands without asking.
+This repository contains an agent skill, [`.claude/skills/setup-vrb-lab/SKILL.md`](.claude/skills/setup-vrb-lab/SKILL.md), that walks you through turning an existing project into a VRB lab: it analyzes your project, asks about ROS version and setup flavor (minimal or CRAM preinstalled), generates the `binder/` files, proposes a local Docker build test, and only then guides you through the GitHub steps. It never runs git commands without asking.
 
 - **Claude Code**: open a session in this repository and type `/setup-vrb-lab`.
 - **Other agents**: point them at [`AGENTS.md`](AGENTS.md) or directly at the `SKILL.md`.

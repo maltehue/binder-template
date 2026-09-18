@@ -2,13 +2,13 @@
 
 This repository is the template for Virtual Research Labs of the EASE Virtual Research
 Building (VRB). It ships agent skills in the vendor-neutral
-[Agent Skills](https://agentskills.io) format under `skills/`.
+[Agent Skills](https://agentskills.io) format under `.claude/skills/`.
 
 ## Available skills
 
 | Skill | Use when |
 |-------|----------|
-| [`skills/setup-vrb-lab/SKILL.md`](skills/setup-vrb-lab/SKILL.md) | Someone wants to turn an existing project (local folder or GitHub repo) into a new VRB lab that runs on Binder |
+| [`.claude/skills/setup-vrb-lab/SKILL.md`](.claude/skills/setup-vrb-lab/SKILL.md) | Someone wants to turn an existing project (local folder or GitHub repo) into a new VRB lab that runs on Binder |
 
 When a request matches a skill, read its `SKILL.md` and follow it. The skill's
 `reference/` and `templates/` directories are meant to be read on demand.
@@ -23,7 +23,7 @@ When a request matches a skill, read its `SKILL.md` and follow it. The skill's
 
 ## Tool-specific discovery
 
-- **Claude Code**: `.claude/skills/setup-vrb-lab` is a symlink to `skills/setup-vrb-lab`,
-  so the skill appears as `/setup-vrb-lab` in sessions started inside this repository.
+- **Claude Code**: the skill lives at `.claude/skills/setup-vrb-lab/`, so it is discovered
+  automatically and appears as `/setup-vrb-lab` in sessions started inside this repository.
 - **Other agents** (Codex, Cursor, Copilot, Gemini CLI, ...): they read this `AGENTS.md`
-  automatically or can be pointed at `skills/setup-vrb-lab/SKILL.md` directly.
+  automatically or can be pointed at `.claude/skills/setup-vrb-lab/SKILL.md` directly.

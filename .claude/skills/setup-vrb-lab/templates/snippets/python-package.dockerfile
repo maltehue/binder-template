@@ -1,7 +1,8 @@
 # --- Install the project as a Python package -----------------------------------
-# Use in PROJECT BUILD STEPS when the project was COPIED into the lab repo
-# (path is inside ${REPO_DIR}), or in EXTERNAL REPOSITORIES right after the
-# clone when it was cloned (path is ${PROJECT_DIR}).
+# Use in PROJECT BUILD STEPS when the project was COPIED into the lab repo, or in
+# EXTERNAL REPOSITORIES right after the clone when it was cloned. Either way the path
+# is inside ${REPO_DIR} (${PROJECT_DIR} after the clone snippet), so the sources are
+# visible in the file browser.
 #
 # Editable install: code changes in the mounted repo are live during local dev.
 RUN python3 -m pip install --no-cache-dir -e ${REPO_DIR}/__PROJECT_NAME__

@@ -14,6 +14,7 @@ Run through this before proposing the first push. Each item is a common Binder f
 - [ ] No secrets, tokens or private URLs in the repo
 - [ ] No files over ~50 MB unless intended (GitHub warns at 50 MB, rejects at 100 MB)
 - [ ] The default notebook path used in the launch URL exists and is spelled correctly (case matters)
+- [ ] Clones and ROS workspaces are under `${REPO_DIR}`; nothing the visitor needs sits in `${HOME}/libs` or `/workspace`
 - [ ] README launch links point at the *new* owner/repo/branch
 - [ ] The repository will be **public**
 - [ ] Local `docker compose ... up --build` succeeded and JupyterLab opened
@@ -44,6 +45,7 @@ Run through this before proposing the first push. Each item is a common Binder f
 | `ModuleNotFoundError` for the project | Not installed, or installed into a different Python | Install with `python3 -m pip` (same interpreter as the kernel); for ROS Python packages, source the workspace in `entrypoint.sh` |
 | ROS packages not found in notebook | Workspace not sourced in the process that starts Jupyter | Source the `setup.bash` in `binder/entrypoint.sh` (the template's entrypoint does this for known paths) |
 | GUI app cannot open display | No display in headless Binder | Start it on `DISPLAY=:1` (the VNC desktop) and open the Desktop tab, or set `LIBGL_ALWAYS_SOFTWARE=1` |
+| Project folder missing from the file browser | Cloned outside `${REPO_DIR}`, or the compose volume mount hides it | Clone into `${REPO_DIR}/<project>`; locally, comment out `volumes:` or clone by hand into the lab directory |
 | Files owned by root on host after local run | Container runs as root | `sudo chown -R $USER:$USER <lab-directory>` |
 | Port 8888 already in use locally | Another Jupyter | Stop it or change the port mapping in `binder/docker-compose.yml` |
 | Changes to Python files not visible locally | Volume mount missing | Check the `volumes:` line maps `../:/home/repo` |
